@@ -19,7 +19,7 @@ export default function LoginScreen() {
       dispatch(registerUser({ name, email, password, role }))
         .unwrap()
         .then(() => {
-          setIsRegister(false); // Switch to login mode
+          setIsRegister(false); // Switch to login mode //
           setName('');
           setPassword('');
           Alert.alert('Success', 'Registration successful! Please login.');
