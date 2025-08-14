@@ -49,6 +49,8 @@ export default function TaskListScreen({ navigation }) {
     }
   };
 
+  
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={[styles.item, item.status === 'DONE' ? styles.itemCompleted : {}]}
