@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } f
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, registerUser } from '../redux/authSlice';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) { // <-- accept navigation prop
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.auth);
 
@@ -19,7 +19,7 @@ export default function LoginScreen() {
       dispatch(registerUser({ name, email, password, role }))
         .unwrap()
         .then(() => {
-          setIsRegister(false); // Switch to login mode //
+          setIsRegister(false); // Switch to login mode
           setName('');
           setPassword('');
           Alert.alert('Success', 'Registration successful! Please login.');
@@ -28,6 +28,9 @@ export default function LoginScreen() {
     } else {
       dispatch(loginUser({ email, password }))
         .unwrap()
+        .then(() => {
+          navigation.replace('TaskList'); // <-- use the correct screen name
+        })
         .catch(err => Alert.alert('Error', err.message));
     }
   };

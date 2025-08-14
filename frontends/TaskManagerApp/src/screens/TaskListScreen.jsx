@@ -32,6 +32,10 @@ export default function TaskListScreen({ navigation }) {
     >
       <Text style={styles.title}>{item.title}</Text>
       <Text>Status: {item.status}</Text>
+      <Button
+        title="Task Details"
+        onPress={() => navigation.navigate('TaskDetail', { taskId: item.id })}
+      />
       {user.role === 'ADMIN' || item.userId === user.id ? (
         <Button title="Delete" color="red" onPress={() => handleDelete(item.id)} />
       ) : null}
@@ -48,7 +52,7 @@ export default function TaskListScreen({ navigation }) {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         ListEmptyComponent={<Text style={{ textAlign: 'center', marginTop: 20 }}>No tasks found</Text>}
       />
-      <Button title="Add Task" onPress={() => navigation.navigate('TaskDetail')} />
+      <Button title="Add Task" onPress={() => navigation.navigate('TaskDetail', { taskId: null })} />
     </View>
   );
 }
