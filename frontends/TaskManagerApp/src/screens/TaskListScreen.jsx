@@ -26,6 +26,11 @@ export default function TaskListScreen({ navigation }) {
     dispatch(deleteTask(id));
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigation.replace('Login');
+  };
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'OPEN': return '#3498db';
@@ -123,7 +128,7 @@ export default function TaskListScreen({ navigation }) {
               </View>
               <TouchableOpacity
                 style={styles.logoutButton}
-                onPress={() => dispatch(logout())}
+                onPress={handleLogout}
                 activeOpacity={0.7}
               >
                 <LinearGradient
