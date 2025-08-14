@@ -1,16 +1,30 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { combineReducers } from 'redux';
 import authReducer from './authSlice';
 import taskReducer from './taskSlice';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
 const rootReducer = combineReducers({
   auth: authReducer,
   tasks: taskReducer,
 });
 
-const persistConfig = { key: 'root', storage: AsyncStorage };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({ reducer: persistedReducer });
-export const persistor = persistStore(store);
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
+const persistor = persistStore(store);
+
+export { store, persistor };

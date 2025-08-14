@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from './src/redux/store';
+import { store, persistor } from './src/redux/store';
 
 // Screens
 import LoginScreen from './src/screens/LoginScreen.jsx';
