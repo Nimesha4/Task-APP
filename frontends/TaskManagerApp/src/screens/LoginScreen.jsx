@@ -18,6 +18,12 @@ export default function LoginScreen() {
       if (!name) return Alert.alert('Error', 'Name is required');
       dispatch(registerUser({ name, email, password, role }))
         .unwrap()
+        .then(() => {
+          setIsRegister(false); // Switch to login mode
+          setName('');
+          setPassword('');
+          Alert.alert('Success', 'Registration successful! Please login.');
+        })
         .catch(err => Alert.alert('Error', err.message));
     } else {
       dispatch(loginUser({ email, password }))
