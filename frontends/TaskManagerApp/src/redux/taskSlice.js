@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import api from '../api/api';
 
 // Async thunks
@@ -20,14 +20,17 @@ export const createTask = createAsyncThunk('tasks/createTask', async ({ title, d
   }
 });
 
-export const updateTask = createAsyncThunk('tasks/updateTask', async ({ id, title, description, status }, { rejectWithValue }) => {
-  try {
-    const res = await api.put(`/tasks/${id}`, { title, description, status });
-    return res.data;
-  } catch (err) {
-    return rejectWithValue(err.response?.data || { message: 'Update failed' });
+export const updateTask = createAsyncThunk(
+  'tasks/updateTask',
+  async ({ id, title, description, status }) => {
+    const response = await api.put(`/tasks/${id}`, {
+      title,
+      description,
+      status,
+    });
+    return response.data;
   }
-});
+);
 
 export const deleteTask = createAsyncThunk('tasks/deleteTask', async (id, { rejectWithValue }) => {
   try {
