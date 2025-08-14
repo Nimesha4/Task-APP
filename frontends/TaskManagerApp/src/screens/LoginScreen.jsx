@@ -4,9 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, registerUser } from '../redux/authSlice';
 import { LinearGradient } from 'expo-linear-gradient';
 
+
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.auth);
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +33,7 @@ export default function LoginScreen({ navigation }) {
       dispatch(loginUser({ email, password }))
         .unwrap()
         .then(() => {
-          navigation.replace('TaskList');
+          navigation.replace('Home');
         })
         .catch(err => Alert.alert('Error', err.message));
     }

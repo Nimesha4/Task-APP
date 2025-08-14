@@ -9,6 +9,7 @@ import { store, persistor } from './src/redux/store';
 import LoginScreen from './src/screens/LoginScreen.jsx';
 import TaskListScreen from './src/screens/TaskListScreen.jsx';
 import TaskDetailScreen from './src/screens/TaskDetailScreen.jsx';
+import HomeScreen from './src/screens/HomeScreen.jsx';
 
 // PermissionGuard Component
 function PermissionGuard({ allowedRoles, children }) {
@@ -39,6 +40,11 @@ export default function App() {
               options={{
                 title: 'Tasks',
               }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TaskDetail"

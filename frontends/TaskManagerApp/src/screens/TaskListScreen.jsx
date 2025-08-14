@@ -208,6 +208,27 @@ export default function TaskListScreen({ navigation }) {
             />
           </View>
         </View>
+
+        {/* Navigation Bar */}
+        <View style={styles.navBar}>
+          <TouchableOpacity 
+            style={styles.navButton}
+            onPress={() => navigation.goBack()}
+            disabled={!navigation.canGoBack()}
+          >
+            <Text style={[styles.navIcon, !navigation.canGoBack() && styles.disabledNavIcon]}>⬅️</Text>
+            <Text style={[styles.navText, !navigation.canGoBack() && styles.disabledNavText]}>Back</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.navButton}
+            onPress={() => navigation.navigate('Home')}
+          >
+            <Text style={styles.navIcon}>🏠</Text>
+            <Text style={styles.navText}>Home</Text>
+          </TouchableOpacity>
+        </View>
+
       </LinearGradient>
     </SafeAreaView>
   );
@@ -484,4 +505,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 20,
   },
+  navBar: {
+  flexDirection: 'row',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  backgroundColor: 'rgba(30, 60, 114, 0.9)',
+  paddingVertical: 12,
+  borderTopWidth: 1,
+  borderTopColor: 'rgba(255, 255, 255, 0.2)',
+},
+navButton: {
+  alignItems: 'center',
+  paddingHorizontal: 15,
+},
+navIcon: {
+  fontSize: 24,
+  color: '#fff',
+  marginBottom: 4,
+},
+navText: {
+  color: 'rgba(255, 255, 255, 0.9)',
+  fontSize: 12,
+  fontWeight: '500',
+},
+disabledNavIcon: {
+  opacity: 0.3,
+},
+disabledNavText: {
+  opacity: 0.5,
+},
 });
